@@ -1,0 +1,14 @@
+# Blueprint opcional para Render (plan gratuito). La base se crea aparte en el panel.
+services:
+  - type: web
+    name: odoo-unicah
+    runtime: docker
+    plan: free
+    healthCheckPath: /web/health
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: ADMIN_PASSWD
+        generateValue: true
+      - key: ODOO_INIT
+        value: base,sale_management,ventas_unicah
