@@ -31,6 +31,7 @@ db_password = ${DB_PASSWORD}
 db_name = ${DB_NAME}
 dbfilter = ^${DB_NAME}\$
 list_db = False
+http_interface = 0.0.0.0
 http_port = ${PORT:-8069}
 proxy_mode = True
 workers = ${ODOO_WORKERS:-0}
@@ -40,7 +41,8 @@ data_dir = /var/lib/odoo
 without_demo = True
 CONF
 
-ARGS=(-c "$CONF")
+ARGS=(-c "$CONF" --http-interface=0.0.0.0 --http-port="${PORT:-8069}")
+echo ">>> Odoo escuchará en 0.0.0.0:${PORT:-8069}"
 # Primera vez con base vacía: ODOO_INIT="base,sale_management,ventas_unicah"
 [ -n "${ODOO_INIT:-}" ]   && ARGS+=(-i "$ODOO_INIT")
 # Tras cambiar código del módulo: ODOO_UPDATE="ventas_unicah"
